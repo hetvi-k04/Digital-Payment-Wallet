@@ -185,6 +185,8 @@ module.exports = function (webpackEnv) {
     }
     return loaders;
   };
+  // /config/webpack.config.js
+
 
   return {
     target: ['browserslist'],

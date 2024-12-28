@@ -1,29 +1,64 @@
+// const express = require('express');
+// const app = express();
+// const mongoose = require('mongoose');
+// require('dotenv').config();
+
+// // Connect to MongoDB
+//  mongoose.connect(process.env.MONGODB_URI ,{
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//   }).then(() => {
+//     console.log('MongoDB connected');
+//   }).catch((err) => {
+//     console.error('MongoDB connection error:', err);
+//   });
+   
+// // Define a simple route for testing
+// app.get('/', (req, res) => {
+//   res.send('Hello, world!');  // Simple response to test the server
+// });
+
+// // Your other routes go here...
+
+// // Start the server
+// app.listen(5000, () => {
+//   console.log('Server is running on port 5000');
+// });
+
+// // mongoose.connect(process.env.MONGODB_URI)
+
 const express = require('express');
-const dotenv = require('dotenv');
 const cors = require('cors');
-const connectDB = require('./config/dbconfig');
-const userRoutes = require('./routes/Userroutes');
+const dotenv = require('dotenv');
+const mongoose = require('mongoose');
+const userRoutes = require('./routes/userRoutes');
+const walletRoutes = require('./routes/walletRoutes');
 
 dotenv.config();
 const app = express();
 
 // Middleware
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
 
-// Database connection
-connectDB();
-
-// Route for the root URL
+// Routes
 app.get('/', (req, res) => {
-  res.send('Welcome to the Paytm Wallet API!');
-});
+    res.send('Hello World');
+  });
+app.use('/api/user', userRoutes);
+app.use('/api/wallet', walletRoutes);
 
-// User routes
-app.use('/api/users', userRoutes);
+// Connect to MongoDB
+mongoose.connect(process.env.MONGODB_URI)
+  .then(() => {
+    console.log('Connected to MongoDB');
+  })
+  .catch(err => {
+    console.log('Error connecting to MongoDB', err);
+  });
 
-// Start the server
+// Server setup
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
-
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});

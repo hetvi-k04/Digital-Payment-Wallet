@@ -1,22 +1,17 @@
-import React from "react";
-import { Button } from "antd";
-import './stylesheets/theme.css';
-import './stylesheets/text-documents.css';
-import './stylesheets/form-elements.css';
-import './stylesheets/aligment.css';
-import './stylesheets/custom components.css';
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Login from "./pages/login";
-import Register from "./pages/register";
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import HomePage from './pages/Home';
+import LoginPage from './pages/Login';
+import DashboardPage from './pages/DashboardPage';
+
 function App() {
   return (
     <div>
-        <BrowserRouter>
-        <Routes>
-        <Route path="/login" element={<Login />} /> 
-        <Route path="/register" element={<Register />} /> 
-        </Routes>
-        </BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/dashboard" element={<DashboardPage />} />
+      </Routes>
     </div>
   );
 }

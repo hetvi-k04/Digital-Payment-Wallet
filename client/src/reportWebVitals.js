@@ -1,24 +1,18 @@
-// src/reportWebVitals.js
-
 const reportWebVitals = (onPerfEntry) => {
-  if (onPerfEntry && onPerfEntry instanceof Function) {
-    // Dynamically import 'web-vitals' and extract methods
-    import('web-vitals').then((webVitals) => {
-      const { getCLS, getFID, getFCP, getLCP, getTTFB } = webVitals;
-      if (getCLS && getFID && getFCP && getLCP && getTTFB) {
-        // Call each of the web vitals with the provided callback
+  if (onPerfEntry && typeof onPerfEntry === 'function') {
+    import('web-vitals')
+      .then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
         getCLS(onPerfEntry);
         getFID(onPerfEntry);
         getFCP(onPerfEntry);
         getLCP(onPerfEntry);
         getTTFB(onPerfEntry);
-      } else {
-        console.error('Error: One or more web vitals functions are missing');
-      }
-    }).catch((error) => {
-      console.error('Error loading web-vitals:', error);
-    });
+      })
+      .catch((error) => {
+        console.error('Failed to load web-vitals:', error);
+      });
   }
 };
 
 export default reportWebVitals;
+

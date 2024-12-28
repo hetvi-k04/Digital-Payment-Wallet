@@ -1,16 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import { BrowserRouter as Router } from 'react-router-dom';
 import App from './App';
-import reportWebVitals from './reportWebVitals'; // Import the reportWebVitals file
-import 'antd/dist/reset.css';
+import { Provider } from 'react-redux';
+import store from './store/store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <Provider store={store}>
+    <Router>
+      <App />
+    </Router>
+  </Provider>
 );
-
-// Track web vitals and log the results to the console
-reportWebVitals(console.log);  // This will print performance metrics like CLS, FID, etc., to the console
